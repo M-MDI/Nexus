@@ -22,3 +22,45 @@ export interface Person {
   industry?: string;
   expertise?: string[];
 }
+
+export type EventStatus = 'draft' | 'published' | 'upcoming' | 'ongoing' | 'past' | 'cancelled';
+
+export interface EventSession {
+  id: ID;
+  title: string;
+  description?: string;
+  startTime: string; // ISO date-time
+  endTime: string;
+  location?: string;
+  speakerName?: string;
+  track?: string;
+}
+
+export interface EventDocument {
+  id: ID;
+  name: string;
+  kind: 'pdf' | 'link' | 'image';
+  url?: string;
+}
+
+export interface Event {
+  id: ID;
+  name: string;
+  description: string;
+  startsAt: string; // ISO date
+  endsAt: string;
+  location: string;
+  city?: string;
+  organizerName: string;
+  organizerId: ID;
+  coverTone?: string;
+  status: EventStatus;
+  capacity?: number;
+  registeredCount?: number;
+  priceLabel?: string;
+  tags?: string[];
+  sessions?: EventSession[];
+  documents?: EventDocument[];
+  myStatus?: 'registered' | 'waitlist' | 'attended' | 'cancelled';
+  myRole?: 'participant' | 'speaker' | 'organizer' | 'staff';
+}
