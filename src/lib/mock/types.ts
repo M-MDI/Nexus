@@ -82,3 +82,52 @@ export interface DirectoryProfile extends Person {
   connectionStatus?: 'none' | 'requested' | 'pending' | 'accepted';
   isFavorite?: boolean;
 }
+
+export type ConnectionStatus = 'accepted' | 'pending' | 'requested' | 'declined';
+
+export interface Connection {
+  id: ID;
+  person: Person;
+  status: ConnectionStatus;
+  connectedAt?: string;
+  eventId?: ID;
+  eventName?: string;
+  upcomingMeeting?: { id: ID; title: string; startsAt: string; location?: string };
+}
+
+export interface MatchSuggestion {
+  id: ID;
+  person: Person;
+  score: number; // 0-100
+  reasons: string[];
+  matchedOffer?: string;
+  matchedSeek?: string;
+  eventId: ID;
+  eventName: string;
+  status: 'new' | 'requested' | 'connected';
+}
+
+export type MeetingStatus =
+  | 'requested'
+  | 'proposed'
+  | 'confirmed'
+  | 'countered'
+  | 'declined'
+  | 'cancelled'
+  | 'completed'
+  | 'expired';
+
+export interface Meeting {
+  id: ID;
+  title: string;
+  withPerson: Person;
+  startsAt: string;
+  endsAt: string;
+  location?: string;
+  eventId?: ID;
+  eventName?: string;
+  status: MeetingStatus;
+  isOrganizer: boolean;
+  agenda?: string;
+  notes?: string;
+}
