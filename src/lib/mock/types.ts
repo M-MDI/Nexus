@@ -64,3 +64,21 @@ export interface Event {
   myStatus?: 'registered' | 'waitlist' | 'attended' | 'cancelled';
   myRole?: 'participant' | 'speaker' | 'organizer' | 'staff';
 }
+
+export type IntentionType = 'offer' | 'seek';
+
+export interface EventIntention {
+  id: ID;
+  eventId: ID;
+  type: IntentionType;
+  category: string;
+  description: string;
+}
+
+export interface DirectoryProfile extends Person {
+  visibleInDirectory: boolean;
+  appearInSuggestions: boolean;
+  intentions?: EventIntention[];
+  connectionStatus?: 'none' | 'requested' | 'pending' | 'accepted';
+  isFavorite?: boolean;
+}
