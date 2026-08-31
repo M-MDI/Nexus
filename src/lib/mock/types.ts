@@ -131,3 +131,23 @@ export interface Meeting {
   agenda?: string;
   notes?: string;
 }
+
+export interface Message {
+  id: ID;
+  conversationId: ID;
+  senderId: ID;
+  senderName: string;
+  text: string;
+  sentAt: string;
+  mine: boolean;
+}
+
+export interface Conversation {
+  id: ID;
+  person: Person;
+  lastMessage: string;
+  lastMessageAt: string;
+  unreadCount: number;
+  messages: Message[];
+  meetingStatus?: MeetingStatus;
+}
