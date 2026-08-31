@@ -151,3 +151,14 @@ export interface Conversation {
   messages: Message[];
   meetingStatus?: MeetingStatus;
 }
+
+export interface Participant {
+  id: ID;
+  person: Person;
+  eventId: ID;
+  ticketType: 'standard' | 'premium' | 'vip';
+  checkedIn: boolean;
+  checkedInAt?: string;
+  registeredAt: string;
+  intentions?: EventIntention[];
+}
