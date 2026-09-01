@@ -162,3 +162,31 @@ export interface Participant {
   registeredAt: string;
   intentions?: EventIntention[];
 }
+
+export interface Company {
+  id: ID;
+  name: string;
+  industry: string;
+  size: string;
+  website?: string;
+  location: string;
+  description: string;
+  logoInitials: string;
+}
+
+export interface CompanyMember {
+  id: ID;
+  person: Person;
+  role: 'admin' | 'manager' | 'member';
+  status: 'active' | 'invited' | 'suspended';
+  joinedAt?: string;
+}
+
+export interface CompanyInvitation {
+  id: ID;
+  email: string;
+  role: 'admin' | 'manager' | 'member';
+  status: 'pending' | 'accepted' | 'expired' | 'revoked';
+  invitedAt: string;
+  expiresAt: string;
+}
