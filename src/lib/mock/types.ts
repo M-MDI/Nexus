@@ -207,3 +207,22 @@ export interface TokenTransaction {
   date: string;
   balanceAfter: number;
 }
+
+export interface Subscription {
+  id: ID;
+  plan: string;
+  status: 'active' | 'trialing' | 'past_due' | 'cancelled';
+  renewsAt?: string;
+  priceLabel: string;
+  ownerName: string;
+  ownerEmail: string;
+}
+
+export interface PlatformStats {
+  totalUsers: number;
+  totalEvents: number;
+  totalMatches: number;
+  totalMeetings: number;
+  activeSubscriptions: number;
+  monthlyGrowth: { label: string; users: number; events: number }[];
+}
