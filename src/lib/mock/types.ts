@@ -190,3 +190,20 @@ export interface CompanyInvitation {
   invitedAt: string;
   expiresAt: string;
 }
+
+export interface TokenPack {
+  id: ID;
+  name: string;
+  tokens: number;
+  priceLabel: string;
+  popular?: boolean;
+}
+
+export interface TokenTransaction {
+  id: ID;
+  kind: 'purchase' | 'consumed' | 'granted' | 'expired' | 'refund';
+  amount: number;
+  label: string;
+  date: string;
+  balanceAfter: number;
+}
