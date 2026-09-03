@@ -226,3 +226,22 @@ export interface PlatformStats {
   activeSubscriptions: number;
   monthlyGrowth: { label: string; users: number; events: number }[];
 }
+
+export interface NotificationPreference {
+  id: string;
+  label: string;
+  description: string;
+  email: boolean;
+  push: boolean;
+}
+
+export interface PrivacyPreferences {
+  profileVisibleInDirectory: boolean;
+  publicBusinessCard: boolean;
+  shareEmail: boolean;
+  sharePhone: boolean;
+  appearInSuggestions: boolean;
+  showOnlineStatus: boolean;
+  allowMeetingRequests: boolean;
+  dataExportRequested: boolean;
+}
