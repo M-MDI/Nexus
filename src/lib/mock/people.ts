@@ -107,6 +107,17 @@ export const people: Person[] = [
     industry: 'SaaS',
     expertise: ['Partenariats', 'Channel', 'SaaS B2B'],
   },
+  {
+    id: 'p-amina',
+    fullName: 'Amina Belkacem',
+    title: 'Directrice Marketing',
+    company: 'VitaCare Labs',
+    location: 'Toulouse, France',
+    email: 'amina@vitacare.example',
+    headline: 'Marketing santé et campagnes grand public.',
+    industry: 'Santé',
+    expertise: ['Marketing santé', 'Marques', 'Digital'],
+  },
 ];
 
 export function getPerson(id: string): Person | undefined {
