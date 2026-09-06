@@ -196,6 +196,43 @@ export const events: Event[] = [
       },
     ],
   },
+  {
+    id: 'ev-maghreb',
+    name: 'Forum Business Maghreb–Europe',
+    description:
+      'Rencontres d’affaires et table ronde sur les opportunités d’investissement entre le Maghreb et l’Europe. Missions B2B et speed meetings.',
+    startsAt: '2026-11-12',
+    endsAt: '2026-11-13',
+    location: 'Omnisports, Casablanca',
+    city: 'Casablanca',
+    organizerName: 'EuroMed Business',
+    organizerId: 'org-euromed',
+    status: 'published',
+    capacity: 900,
+    registeredCount: 274,
+    priceLabel: 'Pass participant 150 €',
+    tags: ['International', 'Investissement', 'Export'],
+    myStatus: 'waitlist',
+    sessions: [
+      {
+        id: 's10',
+        title: 'Table ronde — Investir au Maghreb en 2026',
+        startTime: '2026-11-12T10:00:00',
+        endTime: '2026-11-12T11:30:00',
+        location: 'Salle principale',
+        speakerName: 'Thomas Dubois',
+        track: 'Table ronde',
+      },
+      {
+        id: 's11',
+        title: 'Speed meetings — Secteur industriel',
+        startTime: '2026-11-13T14:00:00',
+        endTime: '2026-11-13T16:00:00',
+        location: 'Espace Networking',
+        track: 'Networking',
+      },
+    ],
+  },
 ];
 
 export function getEvent(id: string): Event | undefined {
