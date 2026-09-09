@@ -201,3 +201,20 @@ export const meetings: Meeting[] = [
     isOrganizer: false,
   },
 ];
+
+export const eventParticipants: Participant[] = [
+  { id: 'pt1', person: byId('p-karim'), eventId: 'ev-salon', ticketType: 'vip', checkedIn: true, checkedInAt: '2026-03-15T09:05:00', registeredAt: '2026-01-20T10:00:00Z', intentions: eventIntentions.slice(0, 2) },
+  { id: 'pt2', person: byId('p-sabrina'), eventId: 'ev-salon', ticketType: 'premium', checkedIn: true, checkedInAt: '2026-03-15T09:12:00', registeredAt: '2026-01-22T14:00:00Z' },
+  { id: 'pt3', person: byId('p-thomas'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: false, registeredAt: '2026-02-01T09:00:00Z' },
+  { id: 'pt4', person: byId('p-lea'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: true, checkedInAt: '2026-03-15T09:20:00', registeredAt: '2026-02-03T11:00:00Z' },
+  { id: 'pt5', person: byId('p-omar'), eventId: 'ev-salon', ticketType: 'premium', checkedIn: true, checkedInAt: '2026-03-15T09:30:00', registeredAt: '2026-02-05T16:00:00Z' },
+  { id: 'pt6', person: byId('p-claire'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: false, registeredAt: '2026-02-10T08:00:00Z' },
+  { id: 'pt7', person: byId('p-yassine'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: false, registeredAt: '2026-02-12T13:00:00Z' },
+  { id: 'pt8', person: byId('p-ines'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: true, checkedInAt: '2026-03-15T10:02:00', registeredAt: '2026-02-14T10:30:00Z' },
+  { id: 'pt9', person: byId('p-nicolas'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: false, registeredAt: '2026-02-18T15:00:00Z' },
+  { id: 'pt10', person: byId('p-amina'), eventId: 'ev-salon', ticketType: 'standard', checkedIn: false, registeredAt: '2026-02-20T09:45:00Z' },
+];
+
+export function getEventSessions(eventId: string) {
+  return events.find(e => e.id === eventId)?.sessions ?? [];
+}
