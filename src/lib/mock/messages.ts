@@ -46,4 +46,27 @@ export const conversations: Conversation[] = [
       { id: 'msg10', conversationId: 'conv-omar', senderId: 'p-omar', senderName: 'Omar Haddad', text: 'La démo de la plateforme logistique sera au Hall 4.', sentAt: '2026-03-13T12:15:00', mine: false },
     ],
   },
+  {
+    id: 'conv-sabrina',
+    person: getPerson('p-sabrina'),
+    lastMessage: 'Merci pour la synthèse, on en reparle après le salon.',
+    lastMessageAt: '2026-03-10T15:22:00',
+    unreadCount: 0,
+    messages: [
+      { id: 'msg11', conversationId: 'conv-sabrina', senderId: 'me', senderName: 'Sophie Martin', text: 'Bonjour Sabrina, voici la synthèse de notre atelier transformation digitale.', sentAt: '2026-03-10T14:50:00', mine: true },
+      { id: 'msg12', conversationId: 'conv-sabrina', senderId: 'p-sabrina', senderName: 'Sabrina Benali', text: 'Merci pour la synthèse, on en reparle après le salon.', sentAt: '2026-03-10T15:22:00', mine: false },
+    ],
+  },
+  {
+    id: 'conv-lea',
+    person: getPerson('p-lea'),
+    lastMessage: 'Le dossier achats sera disponible vendredi.',
+    lastMessageAt: '2026-03-09T09:18:00',
+    unreadCount: 0,
+    meetingStatus: 'cancelled',
+    messages: [
+      { id: 'msg13', conversationId: 'conv-lea', senderId: 'p-lea', senderName: 'Léa Fontaine', text: 'Bonjour, pouvez-vous nous transmettre la documentation technique avant vendredi ?', sentAt: '2026-03-09T09:00:00', mine: false },
+      { id: 'msg14', conversationId: 'conv-lea', senderId: 'me', senderName: 'Sophie Martin', text: 'Bien sûr, le dossier achats sera disponible vendredi.', sentAt: '2026-03-09T09:18:00', mine: true },
+    ],
+  },
 ];
