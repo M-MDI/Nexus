@@ -21,3 +21,11 @@ export const adminEvents = events.map(e => ({
   registeredCount: e.registeredCount ?? 0,
   capacity: e.capacity ?? null,
 }));
+
+export const subscriptions: Subscription[] = [
+  { id: 'sub1', plan: 'Offre Organisateur — Salon Innovation 2026', status: 'active', renewsAt: '2026-03-20', priceLabel: '4 900 MAD', ownerName: 'Nexus Events', ownerEmail: 'contact@nexus-events.example' },
+  { id: 'sub2', plan: 'Premium individuel', status: 'active', renewsAt: '2026-12-01', priceLabel: '29 MAD/mois', ownerName: 'Sophie Martin', ownerEmail: 'sophie.martin@example.com' },
+  { id: 'sub3', plan: 'Pack Jetons — 100 crédits', status: 'active', renewsAt: undefined, priceLabel: '1 590 MAD', ownerName: 'TechNova Solutions', ownerEmail: 'contact@technova.fr' },
+  { id: 'sub4', plan: 'Premium individuel', status: 'trialing', renewsAt: '2026-04-05', priceLabel: '29 MAD/mois', ownerName: 'Thomas Dubois', ownerEmail: 'thomas@euroventures.example' },
+  { id: 'sub5', plan: 'Offre Organisateur — GreenTech Forum', status: 'past_due', renewsAt: '2026-06-01', priceLabel: '3 900 MAD', ownerName: 'GreenTech Cluster', ownerEmail: 'hello@greentech-cluster.example' },
+];
