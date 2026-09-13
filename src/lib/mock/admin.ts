@@ -10,3 +10,14 @@ export const adminUsers = [
   { id: 'u5', person: { fullName: 'Léa Fontaine', email: 'lea.fontaine@altarea.example' }, plan: 'Gratuit', status: 'active' as const, joinedAt: '2025-11-30', eventsCount: 1 },
   { id: 'u6', person: { fullName: 'Inès Cherif', email: 'ines.cherif@minera.example' }, plan: 'Gratuit', status: 'suspended' as const, joinedAt: '2025-09-14', eventsCount: 2 },
 ];
+
+export const adminEvents = events.map(e => ({
+  id: e.id,
+  name: e.name,
+  organizerName: e.organizerName,
+  startsAt: e.startsAt,
+  location: e.location,
+  status: e.status,
+  registeredCount: e.registeredCount ?? 0,
+  capacity: e.capacity ?? null,
+}));
