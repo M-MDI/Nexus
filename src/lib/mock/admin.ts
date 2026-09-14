@@ -45,3 +45,17 @@ export const platformStats: PlatformStats = {
     { label: 'Fév', users: 1284, events: 46 },
   ],
 };
+
+export const organizerStats = {
+  eventId: 'ev-salon',
+  registrations: 864,
+  checkedIn: 512,
+  matchesMade: 243,
+  meetingsBooked: 178,
+  matchRate: '68%',
+  attendanceRate: '59%',
+  dailyCheckIns: [
+    { label: 'Jour 1', value: 268 },
+    { label: 'Jour 2', value: 244 },
+  ],
+};
