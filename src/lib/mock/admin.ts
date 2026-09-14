@@ -29,3 +29,19 @@ export const subscriptions: Subscription[] = [
   { id: 'sub4', plan: 'Premium individuel', status: 'trialing', renewsAt: '2026-04-05', priceLabel: '29 MAD/mois', ownerName: 'Thomas Dubois', ownerEmail: 'thomas@euroventures.example' },
   { id: 'sub5', plan: 'Offre Organisateur — GreenTech Forum', status: 'past_due', renewsAt: '2026-06-01', priceLabel: '3 900 MAD', ownerName: 'GreenTech Cluster', ownerEmail: 'hello@greentech-cluster.example' },
 ];
+
+export const platformStats: PlatformStats = {
+  totalUsers: 1284,
+  totalEvents: 46,
+  totalMatches: 3912,
+  totalMeetings: 1876,
+  activeSubscriptions: 212,
+  monthlyGrowth: [
+    { label: 'Sep', users: 820, events: 28 },
+    { label: 'Oct', users: 940, events: 31 },
+    { label: 'Nov', users: 1050, events: 36 },
+    { label: 'Déc', users: 1180, events: 39 },
+    { label: 'Jan', users: 1240, events: 42 },
+    { label: 'Fév', users: 1284, events: 46 },
+  ],
+};
