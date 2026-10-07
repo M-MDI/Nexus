@@ -39,6 +39,74 @@ export function PageHeader({
   );
 }
 
+const statusStyles: Record<string, string> = {
+  // events
+  published: 'bg-info-surface text-info border-info-border',
+  upcoming: 'bg-info-surface text-info border-info-border',
+  ongoing: 'bg-warning-surface text-warning border-warning-border',
+  past: 'bg-muted text-muted-foreground border-border',
+  cancelled: 'bg-error-surface text-error border-error-border',
+  draft: 'bg-muted text-muted-foreground border-border',
+  // participation
+  registered: 'bg-info-surface text-info border-info-border',
+  waitlist: 'bg-warning-surface text-warning border-warning-border',
+  attended: 'bg-success-surface text-success border-success-border',
+  // meetings
+  requested: 'bg-warning-surface text-warning border-warning-border',
+  proposed: 'bg-info-surface text-info border-info-border',
+  confirmed: 'bg-success-surface text-success border-success-border',
+  countered: 'bg-proposal-surface text-proposal border-proposal-border',
+  declined: 'bg-error-surface text-error border-error-border',
+  completed: 'bg-muted text-muted-foreground border-border',
+  expired: 'bg-muted text-muted-foreground border-border',
+  // connections
+  pending: 'bg-warning-surface text-warning border-warning-border',
+  accepted: 'bg-success-surface text-success border-success-border',
+  active: 'bg-success-surface text-success border-success-border',
+  invited: 'bg-info-surface text-info border-info-border',
+  suspended: 'bg-error-surface text-error border-error-border',
+  trialing: 'bg-info-surface text-info border-info-border',
+  past_due: 'bg-warning-surface text-warning border-warning-border',
+};
+
+const statusLabels: Record<string, string> = {
+  published: 'Publié',
+  upcoming: 'À venir',
+  ongoing: 'En cours',
+  past: 'Passé',
+  cancelled: 'Annulé',
+  draft: 'Brouillon',
+  registered: 'Inscrit',
+  waitlist: 'Liste d’attente',
+  attended: 'Participé',
+  requested: 'Demandé',
+  proposed: 'Proposé',
+  confirmed: 'Confirmé',
+  countered: 'Contre-proposition',
+  declined: 'Refusé',
+  completed: 'Terminé',
+  expired: 'Expiré',
+  pending: 'En attente',
+  accepted: 'Accepté',
+  active: 'Actif',
+  invited: 'Invité',
+  suspended: 'Suspendu',
+  trialing: 'Essai',
+  past_due: 'Impayé',
+};
+
+export function StatusBadge({ status, label }: { status: string; label?: string }) {
+  return (
+    <Badge variant="outline" className={cn('font-medium', statusStyles[status] ?? 'bg-muted text-muted-foreground')}>
+      {label ?? statusLabels[status] ?? status}
+    </Badge>
+  );
+}
+
+export function MeetingStatusBadge({ status }: { status: MeetingStatus }) {
+  return <StatusBadge status={status} />;
+}
+
 export function formatDate(iso?: string) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
