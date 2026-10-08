@@ -107,6 +107,22 @@ export function MeetingStatusBadge({ status }: { status: MeetingStatus }) {
   return <StatusBadge status={status} />;
 }
 
+export function PersonAvatar({ person, size = 'md' }: { person: Person; size?: 'sm' | 'md' | 'lg' }) {
+  const initials = person.fullName
+    .split(' ')
+    .map(n => n[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+  const sizes = { sm: 'size-8 text-xs', md: 'size-10 text-sm', lg: 'size-16 text-xl' };
+  return (
+    <Avatar className={sizes[size]}>
+      {person.avatarUrl && <AvatarImage src={person.avatarUrl} alt={person.fullName} />}
+      <AvatarFallback className="bg-info-surface text-info font-semibold">{initials}</AvatarFallback>
+    </Avatar>
+  );
+}
+
 export function formatDate(iso?: string) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
