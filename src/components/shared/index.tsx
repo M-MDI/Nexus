@@ -146,6 +146,60 @@ export function EmptyState({
   );
 }
 
+export function StatCard({
+  label,
+  value,
+  hint,
+  icon,
+}: {
+  label: string;
+  value: ReactNode;
+  hint?: string;
+  icon?: ReactNode;
+}) {
+  return (
+    <Card className="py-0">
+      <CardContent className="flex items-start justify-between gap-2 px-4 py-3">
+        <div>
+          <p className="text-sm text-muted-foreground">{label}</p>
+          <p className="mt-1 text-2xl font-semibold tracking-tight tnum">{value}</p>
+          {hint && <p className="mt-1 text-xs text-muted-foreground">{hint}</p>}
+        </div>
+        {icon && <div className="rounded-lg bg-primary/10 p-2 text-primary">{icon}</div>}
+      </CardContent>
+    </Card>
+  );
+}
+
+export function SectionCard({
+  title,
+  description,
+  children,
+  actions,
+  className,
+}: {
+  title?: string;
+  description?: string;
+  children: ReactNode;
+  actions?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <Card className={className}>
+      {(title || actions) && (
+        <CardHeader>
+          <div>
+            {title && <CardTitle>{title}</CardTitle>}
+            {description && <CardDescription>{description}</CardDescription>}
+          </div>
+          {actions && <CardAction>{actions}</CardAction>}
+        </CardHeader>
+      )}
+      <CardContent>{children}</CardContent>
+    </Card>
+  );
+}
+
 export function formatDate(iso?: string) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
