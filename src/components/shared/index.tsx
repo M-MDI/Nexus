@@ -200,6 +200,37 @@ export function SectionCard({
   );
 }
 
+/** Simple CSS bar chart for mock analytics (no chart lib dependency). */
+export function MiniBarChart({
+  data,
+  valueKey,
+  labelKey = 'label',
+}: {
+  data: Record<string, any>[];
+  valueKey: string;
+  labelKey?: string;
+}) {
+  const max = Math.max(...data.map(d => Number(d[valueKey]) || 0), 1);
+  return (
+    <div className="flex h-(--chart-height) items-end gap-1 [--chart-height:clamp(7.75rem,18dvh,10rem)] sm:gap-3">
+      {data.map((d, i) => {
+        const v = Number(d[valueKey]) || 0;
+        return (
+          <div key={i} className="flex min-w-0 flex-1 flex-col items-center gap-2">
+            <span className="text-xs font-medium text-muted-foreground tnum">{v}</span>
+            <div
+              className="w-full rounded-t-md bg-chart-1 transition-all"
+              style={{ height: `max(4px, calc((var(--chart-height) - 3rem) * ${v / max}))` }}
+              title={`${d[labelKey]}: ${v}`}
+            />
+            <span className="text-xs text-muted-foreground">{d[labelKey]}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export function formatDate(iso?: string) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
