@@ -7,3 +7,4 @@ export { ProfessionalNetwork } from './ProfessionalNetwork';
 export { CompanyMembership } from './CompanyMembership';
 export { PrivacySettings } from './PrivacySettings';
 export { EditProfileDialog } from './EditProfileDialog';
+export { IntentionsDialog } from './IntentionsDialog';
