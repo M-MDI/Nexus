@@ -27,7 +27,52 @@ export function EventCard({ event }: { event: Event }) {
           </div>
         </div>
       </Link>
-
+      <CardContent className="p-4">
+        <div className="mb-2 flex items-start justify-between gap-2">
+          <Link to={`/events/${event.id}`} className="font-semibold leading-snug hover:text-primary">
+            {event.name}
+          </Link>
+          {event.myStatus && (
+            <Badge variant="secondary" className="shrink-0">
+              {event.myStatus === 'registered' ? 'Inscrit' : event.myStatus === 'attended' ? 'Participé' : 'Liste d’attente'}
+            </Badge>
+          )}
+        </div>
+        <div className="mb-3 space-y-1 text-sm text-muted-foreground">
+          <p className="flex items-center gap-1.5">
+            <CalendarDays className="size-4" /> {formatDate(event.startsAt)}
+            {event.endsAt !== event.startsAt && ` – ${formatDate(event.endsAt)}`}
+          </p>
+          <p className="flex items-center gap-1.5">
+            <MapPin className="size-4" /> {event.location}
+          </p>
+          {event.registeredCount != null && (
+            <p className="flex items-center gap-1.5">
+              <Users className="size-4" /> {event.registeredCount} inscrits
+              {event.capacity ? ` / ${event.capacity}` : ''}
+            </p>
+          )}
+        </div>
+        {event.tags && event.tags.length > 0 && (
+          <div className="mb-3 flex flex-wrap gap-1">
+            {event.tags.slice(0, 3).map(tag => (
+              <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
+            ))}
+          </div>
+        )}
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-medium">{event.priceLabel}</span>
+          {registered ? (
+            <Button variant="outline" size="sm" asChild>
+              <Link to={`/events/${event.id}`}>Voir ma fiche</Link>
+            </Button>
+          ) : (
+            <Button size="sm" asChild>
+              <Link to={`/events/${event.id}`}>S’inscrire</Link>
+            </Button>
+          )}
+        </div>
+      </CardContent>
     </Card>
   );
 }
