@@ -60,7 +60,13 @@ export function EventsMyPage() {
             upcoming.map(e => <MyEventRow key={e.id} event={e} />)
           )}
         </TabsContent>
-
+        <TabsContent value="past" className="mt-4 space-y-3">
+          {past.length === 0 ? (
+            <EmptyState title="Aucun événement passé" />
+          ) : (
+            past.map(e => <MyEventRow key={e.id} event={e} />)
+          )}
+        </TabsContent>
       </Tabs>
     </div>
   );
