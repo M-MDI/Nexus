@@ -122,7 +122,27 @@ export function EventsAgendaPage() {
           )}
         </TabsContent>
 
-
+        <TabsContent value="meetings" className="mt-4 space-y-2">
+          {scheduledMeetings.length === 0 ? (
+            <EmptyState title="Aucun rendez-vous planifié" description="Vos demandes et rendez-vous confirmés apparaîtront ici." />
+          ) : (
+            scheduledMeetings.map(m => (
+              <Card key={m.id}>
+                <CardContent className="flex flex-wrap items-center gap-4 p-4">
+                  <div className="w-36 shrink-0">
+                    <p className="text-sm font-medium">{formatDate(m.startsAt)}</p>
+                    <p className="text-xs text-muted-foreground">{formatTime(m.startsAt)}</p>
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-medium">{m.title}</p>
+                    <p className="text-sm text-muted-foreground">avec {m.withPerson.fullName} — {m.withPerson.company}</p>
+                  </div>
+                  {m.location && <p className="text-sm text-muted-foreground">{m.location}</p>}
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </TabsContent>
       </Tabs>
     </div>
   );
