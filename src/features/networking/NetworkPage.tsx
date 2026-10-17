@@ -45,7 +45,16 @@ export function NetworkPage() {
           )}
         </TabsContent>
 
-
+        <TabsContent value="requests" className="mt-4 space-y-3">
+          {pendingReceived.length === 0 && sent.length === 0 ? (
+            <EmptyState title="Aucune demande en cours" />
+          ) : (
+            <>
+              {pendingReceived.map(c => <RequestRow key={c.id} connection={c} incoming />)}
+              {sent.map(c => <RequestRow key={c.id} connection={c} incoming={false} />)}
+            </>
+          )}
+        </TabsContent>
 
 
 
