@@ -56,7 +56,9 @@ export function NetworkPage() {
           )}
         </TabsContent>
 
-
+        <TabsContent value="directory" className="mt-4">
+          <DirectoryGrid />
+        </TabsContent>
 
 
       </Tabs>
