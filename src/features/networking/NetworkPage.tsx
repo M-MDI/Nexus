@@ -60,7 +60,9 @@ export function NetworkPage() {
           <DirectoryGrid />
         </TabsContent>
 
-
+        <TabsContent value="favorites" className="mt-4">
+          <FavoritesGrid />
+        </TabsContent>
       </Tabs>
     </div>
   );
