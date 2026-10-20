@@ -133,7 +133,55 @@ export function BusinessCardPage() {
         </div>
 
         {/* Sharing tools */}
+        <div className="flex flex-col gap-4 lg:col-span-2">
+          <Card className="py-0">
+            <CardContent className="p-4">
+              <div className="grid items-center gap-3 min-[380px]:grid-cols-[auto_minmax(0,1fr)]">
+                <div className="mx-auto flex size-24 items-center justify-center rounded-lg border-2 border-dashed border-border bg-muted sm:size-28">
+                  <QrCode className="size-14 text-icon" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">QR code de la carte</h3>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Le QR code sera généré par le backend à partir de votre lien public.
+                  </p>
+                  <Button variant="outline" size="sm" className="mt-3 h-auto min-h-7 whitespace-normal py-1 text-left" onClick={() => toast.success('QR code téléchargé (démo)')}>
+                    <Download className="size-4" /> Télécharger le QR code
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
+          <Card className="py-0">
+            <CardContent className="p-4">
+              <h3 className="mb-3 font-semibold">Lien public</h3>
+              <div className="flex items-center gap-2">
+                <code className="min-w-0 flex-1 rounded-md bg-muted px-3 py-2 text-xs [overflow-wrap:anywhere]">{publicUrl}</code>
+                <Button variant="outline" size="icon" onClick={copyLink} aria-label="Copier le lien">
+                  <Copy className="size-4" />
+                </Button>
+              </div>
+              <Button variant="outline" className="mt-3 w-full" onClick={downloadVcf}>
+                <Download className="mr-2 size-4" /> Exporter en .vcf
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="py-0">
+            <CardContent className="p-4">
+              <h3 className="mb-2 font-semibold">Visibilité</h3>
+              <p className="text-sm text-muted-foreground">
+                {privacy.publicBusinessCard
+                  ? 'Votre carte est publique : toute personne disposant du lien peut la consulter.'
+                  : 'Votre carte n’est pas publique. Activez-la dans Confidentialité pour la partager.'}
+              </p>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Email {privacy.shareEmail ? 'visible' : 'masqué'} · Téléphone {privacy.sharePhone ? 'visible' : 'masqué'}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
