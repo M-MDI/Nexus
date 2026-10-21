@@ -119,7 +119,55 @@ export function MessagesPage() {
         </Card>
 
         {/* Thread */}
-
+        <Card className="min-h-0 gap-0 py-0">
+          {active ? (
+            <>
+              <div className="flex shrink-0 items-center gap-3 border-b border-border p-3">
+                <PersonAvatar person={active.person} size="sm" />
+                <div className="min-w-0 flex-1">
+                  <p className="break-words text-sm font-semibold">{active.person.fullName}</p>
+                  <p className="break-words text-xs text-muted-foreground">{active.person.title} — {active.person.company}</p>
+                </div>
+                {active.meetingStatus && (
+                  <Badge variant="secondary">{active.meetingStatus === 'confirmed' ? 'RDV confirmé' : 'RDV en cours'}</Badge>
+                )}
+              </div>
+              <div className="lg:min-h-0 lg:flex-1 lg:overflow-y-auto" role="region" aria-label="Historique des messages" tabIndex={0}>
+                <div className="space-y-3 p-4">
+                  {active.messages.map(m => (
+                    <div key={m.id} className={cn('flex', m.mine ? 'justify-end' : 'justify-start')}>
+                      <div
+                        className={cn(
+                          'max-w-[85%] rounded-2xl px-4 py-2 text-sm [overflow-wrap:anywhere] sm:max-w-[75%]',
+                          m.mine ? 'bg-primary text-primary-foreground' : 'bg-muted text-foreground'
+                        )}
+                      >
+                        <p>{m.text}</p>
+                        <p className={cn('mt-1 text-right text-[10px]', m.mine ? 'text-primary-foreground' : 'text-muted-foreground')}>
+                          {timeOf(m.sentAt)}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-2 border-t border-border p-3">
+                <input
+                  value={draft}
+                  onChange={e => setDraft(e.target.value)}
+                  onKeyDown={e => e.key === 'Enter' && send()}
+                  placeholder="Écrire un message…"
+                  className="h-9 min-w-0 flex-1 rounded-md border border-input bg-transparent px-3 text-sm"
+                />
+                <Button size="icon" onClick={send} disabled={!draft.trim()} aria-label="Envoyer">
+                  <Send className="size-4" />
+                </Button>
+              </div>
+            </>
+          ) : (
+            <EmptyState title="Sélectionnez une conversation" className="h-full" />
+          )}
+        </Card>
       </div>
     </div>
   );
