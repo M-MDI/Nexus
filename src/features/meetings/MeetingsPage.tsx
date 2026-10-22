@@ -140,7 +140,36 @@ export function MeetingsPage() {
       </Tabs>
 
       {/* Detail dialog */}
-
+      <Dialog open={!!detail} onOpenChange={open => !open && setDetail(null)}>
+        <DialogContent>
+          {detail && (
+            <>
+              <DialogHeader>
+                <DialogTitle>{detail.title}</DialogTitle>
+                <DialogDescription>
+                  avec {detail.withPerson.fullName} — {detail.withPerson.title}, {detail.withPerson.company}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="space-y-3 text-sm">
+                <p className="flex items-center gap-2"><CalendarDays className="size-4 text-muted-foreground" />{formatDate(detail.startsAt)}</p>
+                <p className="flex items-center gap-2"><Clock className="size-4 text-muted-foreground" />{formatTime(detail.startsAt)} – {formatTime(detail.endsAt)}</p>
+                {detail.location && <p className="flex items-center gap-2"><MapPin className="size-4 text-muted-foreground" />{detail.location}</p>}
+                {detail.location?.toLowerCase().includes('visio') && <Video className="size-4 text-muted-foreground" />}
+                {detail.eventName && <p className="text-muted-foreground">Événement : {detail.eventName}</p>}
+                {detail.agenda && <p className="rounded-md bg-muted p-3 text-muted-foreground">{detail.agenda}</p>}
+                {detail.notes && <p className="rounded-md bg-muted p-3 text-muted-foreground">{detail.notes}</p>}
+                <MeetingStatusBadge status={detail.status} />
+              </div>
+              <DialogFooter>
+                <Button variant="outline" onClick={() => { update(detail.id, 'cancelled'); toast('Rendez-vous annulé'); }}>Annuler le RDV</Button>
+                {detail.status === 'confirmed' && (
+                  <Button onClick={() => toast.success('Invitation ajoutée à votre agenda (démo)')}>Ajouter à l’agenda</Button>
+                )}
+              </DialogFooter>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
 
     </div>
