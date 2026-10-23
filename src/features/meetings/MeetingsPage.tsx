@@ -171,7 +171,11 @@ export function MeetingsPage() {
         </DialogContent>
       </Dialog>
 
-
+      <RequestMeetingDialog open={dialogOpen} onClose={() => setDialogOpen(false)} onCreate={m => {
+        setItems(prev => [...prev, m]);
+        setDialogOpen(false);
+        toast.success('Demande de rendez-vous envoyée');
+      }} />
     </div>
   );
 }
