@@ -123,7 +123,84 @@ export function MatchingPage() {
         </CardContent>
       </Card>
 
+      <Tabs defaultValue="suggestions">
+        <TabsList>
+          <TabsTrigger value="suggestions">Suggestions ({suggestions.length})</TabsTrigger>
+          <TabsTrigger value="directory">Annuaire</TabsTrigger>
+        </TabsList>
 
+        <TabsContent value="suggestions" className="mt-4 space-y-4">
+          {suggestions.length === 0 ? (
+            <EmptyState
+              title="Aucune suggestion pour le moment"
+              description="Complétez vos intentions pour recevoir des suggestions de contacts."
+            />
+          ) : (
+            suggestions.map(m => (
+              <Card key={m.id}>
+                <CardContent className="p-4">
+                  <div className="flex flex-wrap gap-4">
+                    <PersonAvatar person={m.person} size="lg" />
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="font-semibold">{m.person.fullName}</p>
+                        {m.status === 'connected' && <StatusBadge status="accepted" label="Déjà connecté" />}
+                        {requested.has(m.person.id) && <StatusBadge status="pending" label="Demande envoyée" />}
+                      </div>
+                      <p className="text-sm text-muted-foreground">{m.person.title} — {m.person.company}</p>
+                      {m.person.location && (
+                        <p className="mt-0.5 flex items-center gap-1 text-xs text-muted-foreground">
+                          <MapPin className="size-3" /> {m.person.location}
+                        </p>
+                      )}
+                      <div className="mt-3">
+                        <div className="mb-1 flex items-center justify-between text-xs">
+                          <span className="font-medium text-muted-foreground">Score de compatibilité</span>
+                          <span className={`font-semibold ${scoreColor(m.score)}`}>{m.score}%</span>
+                        </div>
+                        <Progress value={m.score} className="h-1.5" />
+                      </div>
+                      <ul className="mt-3 space-y-1">
+                        {m.reasons.map((r, i) => (
+                          <li key={i} className="flex items-start gap-1.5 text-sm text-muted-foreground">
+                            <Star className="mt-0.5 size-3.5 shrink-0 text-warning" /> {r}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="flex w-full flex-col gap-2 sm:w-44">
+                      <Button
+                        size="sm"
+                        disabled={requested.has(m.person.id) || m.status === 'connected'}
+                        onClick={() => sendRequest(m.person.id, m.person.fullName)}
+                      >
+                        <UserPlus className="mr-1.5 size-4" />
+                        {m.status === 'connected' ? 'Connecté' : requested.has(m.person.id) ? 'Envoyée' : 'Se connecter'}
+                      </Button>
+                      <Button variant="outline" size="sm" asChild>
+                        <Link to="/messages">Message</Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => toggleFavorite(m.person.id)}
+                        className={favorites.has(m.person.id) ? 'text-error' : ''}
+                      >
+                        <Heart className={`mr-1.5 size-4 ${favorites.has(m.person.id) ? 'fill-current' : ''}`} />
+                        {favorites.has(m.person.id) ? 'Favori' : 'Ajouter aux favoris'}
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          )}
+        </TabsContent>
+
+        <TabsContent value="directory" className="mt-4">
+          <DirectoryTab favorites={favorites} onToggleFavorite={toggleFavorite} />
+        </TabsContent>
+      </Tabs>
 
 
     </div>
