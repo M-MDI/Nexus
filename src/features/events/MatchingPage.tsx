@@ -202,7 +202,12 @@ export function MatchingPage() {
         </TabsContent>
       </Tabs>
 
-
+      <IntentionsDialog
+        isOpen={intentionsOpen}
+        onClose={() => setIntentionsOpen(false)}
+        intentions={intentions}
+        onSave={() => toast.success('Intentions enregistrées (démo)')}
+      />
     </div>
   );
 }
