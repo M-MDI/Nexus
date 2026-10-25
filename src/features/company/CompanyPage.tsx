@@ -37,7 +37,41 @@ export function CompanyPage() {
         <StatCard label="Secteur" value={company.industry} icon={<Globe className="size-5" />} />
       </div>
 
+      <div className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+        <SectionCard
+          title={company.name}
+          description={company.industry}
+          actions={<Button variant="outline" size="sm" onClick={() => setEditOpen(true)}><Pencil className="mr-2 size-4" />Modifier</Button>}
+        >
+          <div className="flex items-start gap-4">
+            <div className="flex size-14 shrink-0 items-center justify-center rounded-xl bg-info-surface text-lg font-bold text-info">
+              {company.logoInitials}
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm leading-relaxed text-muted-foreground">{company.description}</p>
+              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-sm text-muted-foreground">
+                {company.website && <span className="flex items-center gap-1.5"><Globe className="size-4" />{company.website}</span>}
+                <span className="flex items-center gap-1.5"><MapPin className="size-4" />{company.location}</span>
+                <span className="flex items-center gap-1.5"><Mail className="size-4" />contact@technova.fr</span>
+              </div>
+            </div>
+          </div>
+        </SectionCard>
 
+        <SectionCard title="Accès rapide">
+          <div className="space-y-2">
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <Link to="/company/collaborators">Gérer les collaborateurs</Link>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <Link to="/company/invitations">Inviter un collaborateur</Link>
+            </Button>
+            <Button variant="outline" className="w-full justify-start" asChild>
+              <Link to="/company/tokens">Acheter des jetons</Link>
+            </Button>
+          </div>
+        </SectionCard>
+      </div>
 
 
     </div>
