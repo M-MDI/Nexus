@@ -73,7 +73,28 @@ export function CompanyPage() {
         </SectionCard>
       </div>
 
-
+      <Dialog open={editOpen} onOpenChange={setEditOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Modifier l’entreprise</DialogTitle>
+            <DialogDescription>Ces informations apparaissent sur le profil de vos collaborateurs.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="co-name">Nom</Label>
+              <Input id="co-name" value={name} onChange={e => setName(e.target.value)} />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="co-desc">Description</Label>
+              <Textarea id="co-desc" value={description} onChange={e => setDescription(e.target.value)} rows={4} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setEditOpen(false)}>Annuler</Button>
+            <Button onClick={() => { setEditOpen(false); toast.success('Entreprise mise à jour (démo)'); }}>Enregistrer</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
