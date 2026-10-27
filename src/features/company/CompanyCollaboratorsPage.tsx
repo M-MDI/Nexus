@@ -81,7 +81,58 @@ export function CompanyCollaboratorsPage() {
         </Select>
       </div>
 
-
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Collaborateur</TableHead>
+                <TableHead>Rôle</TableHead>
+                <TableHead>Statut</TableHead>
+                <TableHead>Depuis</TableHead>
+                <TableHead className="w-10" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {members.map(m => (
+                <TableRow key={m.id}>
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      <PersonAvatar person={m.person} size="sm" />
+                      <div>
+                        <p className="font-medium">{m.person.fullName}</p>
+                        <p className="text-xs text-muted-foreground">{m.person.title} — {m.person.email}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{roleLabels[m.role]}</TableCell>
+                  <TableCell><StatusBadge status={m.status} /></TableCell>
+                  <TableCell className="text-muted-foreground">{m.joinedAt ? formatDate(m.joinedAt) : '—'}</TableCell>
+                  <TableCell>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" size="icon"><MoreHorizontal className="size-4" /></Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuItem onClick={() => toast('Changement de rôle (démo)')}>Changer le rôle</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => toast('Invitation renvoyée (démo)')}>Renvoyer l’invitation</DropdownMenuItem>
+                        <DropdownMenuItem variant="destructive" onClick={() => toast('Accès suspendu (démo)')}>Suspendre</DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {members.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="py-10 text-center text-sm text-muted-foreground">
+                    Aucun collaborateur ne correspond aux filtres.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
