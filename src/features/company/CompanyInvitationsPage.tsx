@@ -126,7 +126,35 @@ export function CompanyInvitationsPage() {
         Les règles de consommation et d’expiration des jetons sont définies par votre offre.
       </p>
 
-
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Inviter un collaborateur</DialogTitle>
+            <DialogDescription>Une invitation par e-mail — le collaborateur l’accepte depuis son compte Nexus.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="inv-email">Adresse e-mail</Label>
+              <Input id="inv-email" type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="prenom@entreprise.fr" />
+            </div>
+            <div className="space-y-1.5">
+              <Label>Rôle</Label>
+              <Select value={role} onValueChange={v => setRole(v as CompanyInvitation['role'])}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="member">Membre</SelectItem>
+                  <SelectItem value="manager">Manager</SelectItem>
+                  <SelectItem value="admin">Administrateur</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>Annuler</Button>
+            <Button onClick={send} disabled={!email.includes('@')}>Envoyer l’invitation</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
