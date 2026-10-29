@@ -42,7 +42,29 @@ export function CompanyTokensPage() {
         <StatCard label="Invitations envoyées" value={tokenTransactions.filter(t => t.kind === 'consumed').length} />
       </div>
 
-
+      <div>
+        <h2 className="mb-3 text-lg font-semibold">Acheter des jetons</h2>
+        <div className="grid gap-4 md:grid-cols-3">
+          {tokenPacks.map(pack => (
+            <Card key={pack.id} className={pack.popular ? 'border-primary' : ''}>
+              {pack.popular && (
+                <div className="border-b border-info-border bg-info-surface px-6 py-1.5 text-center text-xs font-medium text-info">
+                  Le plus choisi
+                </div>
+              )}
+              <CardContent className="p-6">
+                <p className="font-semibold">{pack.name}</p>
+                <p className="mt-1 text-3xl font-bold tnum">{pack.tokens} <span className="text-base font-normal text-muted-foreground">jetons</span></p>
+                <p className="mt-1 text-sm text-muted-foreground">{pack.priceLabel}</p>
+                <p className="mt-2 text-xs text-muted-foreground">≈ {Math.floor(pack.tokens / 2)} invitations</p>
+                <Button className="mt-4 w-full" variant={pack.popular ? 'default' : 'outline'} onClick={() => buy(pack)} disabled={purchased.has(pack.id)}>
+                  {purchased.has(pack.id) ? <><Check className="mr-2 size-4" />Ajouté</> : <><Plus className="mr-2 size-4" />Acheter</>}
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
 
 
     </div>
