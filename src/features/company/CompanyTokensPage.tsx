@@ -66,7 +66,35 @@ export function CompanyTokensPage() {
         </div>
       </div>
 
-
+      <Card>
+        <CardHeader><CardTitle className="text-base">Historique des jetons</CardTitle></CardHeader>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Date</TableHead>
+                <TableHead>Type</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead className="text-right">Montant</TableHead>
+                <TableHead className="text-right">Solde</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {tokenTransactions.map(t => (
+                <TableRow key={t.id}>
+                  <TableCell className="text-muted-foreground">{formatDate(t.date)}</TableCell>
+                  <TableCell><Badge variant="outline">{kindLabels[t.kind] ?? t.kind}</Badge></TableCell>
+                  <TableCell>{t.label}</TableCell>
+                  <TableCell className={`text-right font-medium ${t.amount > 0 ? 'text-success' : 'text-muted-foreground'}`}>
+                    {t.amount > 0 ? `+${t.amount}` : t.amount}
+                  </TableCell>
+                  <TableCell className="text-right text-muted-foreground">{t.balanceAfter}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
