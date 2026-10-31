@@ -108,7 +108,38 @@ export function OrganizerEventsPage() {
         )}
       </div>
 
-
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{editing ? 'Modifier l’événement' : 'Nouvel événement'}</DialogTitle>
+            <DialogDescription>Les champs principaux de l’événement. Le programme et les documents se gèrent ensuite.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="oe-name">Nom de l’événement</Label>
+              <Input id="oe-name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Ex. Salon Innovation 2027" />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="oe-date">Date de début</Label>
+                <Input id="oe-date" type="date" value={form.startsAt} onChange={e => setForm(f => ({ ...f, startsAt: e.target.value }))} />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="oe-loc">Lieu</Label>
+                <Input id="oe-loc" value={form.location} onChange={e => setForm(f => ({ ...f, location: e.target.value }))} placeholder="Ville, lieu" />
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="oe-desc">Description</Label>
+              <Textarea id="oe-desc" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={3} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>Annuler</Button>
+            <Button onClick={save} disabled={!form.name.trim()}>{editing ? 'Enregistrer' : 'Créer le brouillon'}</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
