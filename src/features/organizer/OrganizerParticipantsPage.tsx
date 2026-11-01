@@ -84,7 +84,61 @@ export function OrganizerParticipantsPage() {
         </Select>
       </div>
 
-
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Participant</TableHead>
+                <TableHead>Billet</TableHead>
+                <TableHead>Inscrit le</TableHead>
+                <TableHead>Présence</TableHead>
+                <TableHead className="w-px" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filtered.map(p => (
+                <TableRow key={p.id}>
+                  <TableCell className="min-w-44 whitespace-normal">
+                    <div className="flex items-center gap-3">
+                      <PersonAvatar person={p.person} size="sm" />
+                      <div>
+                        <p className="font-medium">{p.person.fullName}</p>
+                        <p className="text-xs text-muted-foreground">{p.person.title} — {p.person.company}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{ticketLabels[p.ticketType]}</TableCell>
+                  <TableCell className="text-muted-foreground">{formatDate(p.registeredAt)}</TableCell>
+                  <TableCell>
+                    {p.checkedIn ? (
+                      <StatusBadge status="attended" label={`Présent ${p.checkedInAt ? `· ${new Date(p.checkedInAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}` : ''}`} />
+                    ) : (
+                      <StatusBadge status="pending" label="Absent" />
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant={p.checkedIn ? 'outline' : 'default'}
+                      size="sm"
+                      onClick={() => { toggleCheckIn(p.id); toast.success(p.checkedIn ? 'Présence retirée' : `${p.person.fullName} marqué·e présent·e`); }}
+                    >
+                      {p.checkedIn ? 'Retirer' : 'Check-in'}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {filtered.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="py-10 text-center text-sm text-muted-foreground">
+                    Aucun participant ne correspond aux filtres.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
