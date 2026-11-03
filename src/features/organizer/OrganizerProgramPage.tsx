@@ -120,7 +120,51 @@ export function OrganizerProgramPage() {
         ))
       )}
 
-
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{editing ? 'Modifier la session' : 'Nouvelle session'}</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="ps-title">Titre</Label>
+              <Input id="ps-title" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="ps-start">Début</Label>
+                <Input id="ps-start" type="datetime-local" value={form.start} onChange={e => setForm(f => ({ ...f, start: e.target.value }))} />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="ps-end">Fin</Label>
+                <Input id="ps-end" type="datetime-local" value={form.end} onChange={e => setForm(f => ({ ...f, end: e.target.value }))} />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="ps-loc">Lieu</Label>
+                <Input id="ps-loc" value={form.location} onChange={e => setForm(f => ({ ...f, location: e.target.value }))} />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="ps-track">Track</Label>
+                <Input id="ps-track" value={form.track} onChange={e => setForm(f => ({ ...f, track: e.target.value }))} placeholder="Plénière, Atelier…" />
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="ps-speaker">Intervenant</Label>
+              <Input id="ps-speaker" value={form.speakerName} onChange={e => setForm(f => ({ ...f, speakerName: e.target.value }))} />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="ps-desc">Description</Label>
+              <Textarea id="ps-desc" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} rows={2} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>Annuler</Button>
+            <Button onClick={save} disabled={!form.title.trim() || !form.start || !form.end}>Enregistrer</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
