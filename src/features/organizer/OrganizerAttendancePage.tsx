@@ -67,7 +67,20 @@ export function OrganizerAttendancePage() {
         <StatCard label="Taux de présence" value={`${stats.rate}%`} />
       </div>
 
-
+      <Card>
+        <CardContent className="flex flex-wrap items-center gap-3 p-4">
+          <ScanLine className="size-5 text-primary" />
+          <Input
+            value={scanInput}
+            onChange={e => setScanInput(e.target.value)}
+            onKeyDown={e => e.key === 'Enter' && handleScan()}
+            placeholder="Scanner un badge ou saisir un nom / e-mail…"
+            className="max-w-md flex-1"
+          />
+          <Button onClick={handleScan}>Valider</Button>
+          <Badge variant="outline" className="gap-1"><QrCode className="size-3" /> Mode badge (démo)</Badge>
+        </CardContent>
+      </Card>
 
 
     </div>
