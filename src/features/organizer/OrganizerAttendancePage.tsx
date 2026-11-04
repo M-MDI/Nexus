@@ -82,7 +82,43 @@ export function OrganizerAttendancePage() {
         </CardContent>
       </Card>
 
-
+      <Tabs defaultValue="present">
+        <TabsList>
+          <TabsTrigger value="present">Présents ({present.length})</TabsTrigger>
+          <TabsTrigger value="absent">Non présents ({absent.length})</TabsTrigger>
+        </TabsList>
+        <TabsContent value="present" className="mt-4 space-y-2">
+          {present.length === 0 && <p className="py-8 text-center text-sm text-muted-foreground">Aucun check-in pour le moment.</p>}
+          {present.map(p => (
+            <Card key={p.id}>
+              <CardContent className="flex items-center gap-3 p-3">
+                <PersonAvatar person={p.person} size="sm" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium">{p.person.fullName}</p>
+                  <p className="text-xs text-muted-foreground">{p.person.company}</p>
+                </div>
+                <span className="text-xs text-muted-foreground">{p.checkedInAt ? formatTime(p.checkedInAt) : ''}</span>
+                <StatusBadge status="attended" />
+                <Button variant="ghost" size="icon" onClick={() => undo(p.id)} aria-label="Annuler"><Undo2 className="size-4" /></Button>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+        <TabsContent value="absent" className="mt-4 space-y-2">
+          {absent.map(p => (
+            <Card key={p.id}>
+              <CardContent className="flex items-center gap-3 p-3">
+                <PersonAvatar person={p.person} size="sm" />
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-medium">{p.person.fullName}</p>
+                  <p className="text-xs text-muted-foreground">{p.person.company}</p>
+                </div>
+                <Button size="sm" variant="outline" onClick={() => { checkIn(p.id); toast.success(`${p.person.fullName} enregistré·e`); }}>Check-in</Button>
+              </CardContent>
+            </Card>
+          ))}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
