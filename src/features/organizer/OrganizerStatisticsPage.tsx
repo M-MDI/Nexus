@@ -27,7 +27,14 @@ export function OrganizerStatisticsPage() {
         <StatCard label="Rendez-vous confirmés" value={confirmedMeetings} icon={<CalendarCheck className="size-5" />} hint={`${eventMeetings.length} demandés au total`} />
       </div>
 
-
+      <div className="grid gap-4 md:grid-cols-2">
+        <SectionCard title="Check-ins par jour">
+          <MiniBarChart data={organizerStats.dailyCheckIns} valueKey="value" />
+        </SectionCard>
+        <SectionCard title="Top intentions proposées">
+          <TopIntentions />
+        </SectionCard>
+      </div>
 
 
     </div>
