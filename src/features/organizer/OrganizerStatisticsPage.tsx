@@ -36,7 +36,14 @@ export function OrganizerStatisticsPage() {
         </SectionCard>
       </div>
 
-
+      <SectionCard title="Bilan de l’événement" description="Indicateurs agrégés — aucune donnée personnelle individuelle exposée.">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <MiniStat label="Inscriptions" value={organizerStats.registrations} />
+          <MiniStat label="Présences" value={checkedIn} />
+          <MiniStat label="Matches créés" value={matches} />
+          <MiniStat label="RDV confirmés" value={confirmedMeetings} />
+        </div>
+      </SectionCard>
     </div>
   );
 }
