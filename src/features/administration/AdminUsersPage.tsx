@@ -63,7 +63,43 @@ export function AdminUsersPage() {
         </Select>
       </div>
 
-
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Utilisateur</TableHead>
+                <TableHead>Offre</TableHead>
+                <TableHead>Événements</TableHead>
+                <TableHead>Inscrit le</TableHead>
+                <TableHead>Statut</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {users.map(u => (
+                <TableRow key={u.id}>
+                  <TableCell>
+                    <div className="flex items-center gap-3">
+                      <PersonAvatar person={{ ...u.person, id: u.id, title: '', company: '' }} size="sm" />
+                      <div>
+                        <p className="font-medium">{u.person.fullName}</p>
+                        <p className="text-xs text-muted-foreground">{u.person.email}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell><Badge variant="secondary">{u.plan}</Badge></TableCell>
+                  <TableCell>{u.eventsCount}</TableCell>
+                  <TableCell className="text-muted-foreground">{formatDate(u.joinedAt)}</TableCell>
+                  <TableCell><StatusBadge status={u.status} /></TableCell>
+                </TableRow>
+              ))}
+              {users.length === 0 && (
+                <TableRow><TableCell colSpan={5} className="py-10 text-center text-sm text-muted-foreground">Aucun utilisateur trouvé.</TableCell></TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }
