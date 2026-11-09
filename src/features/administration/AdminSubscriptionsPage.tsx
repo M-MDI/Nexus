@@ -72,7 +72,47 @@ export function AdminSubscriptionsPage() {
         ))}
       </div>
 
-
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Offre</TableHead>
+                <TableHead>Client</TableHead>
+                <TableHead>Prix</TableHead>
+                <TableHead>Renouvellement</TableHead>
+                <TableHead>Statut</TableHead>
+                <TableHead className="w-px" />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {items.map(s => (
+                <TableRow key={s.id}>
+                  <TableCell className="min-w-28 font-medium whitespace-normal">{s.plan}</TableCell>
+                  <TableCell className="min-w-32 whitespace-normal [overflow-wrap:anywhere]">
+                    <p>{s.ownerName}</p>
+                    <p className="text-xs text-muted-foreground">{s.ownerEmail}</p>
+                  </TableCell>
+                  <TableCell>{s.priceLabel}</TableCell>
+                  <TableCell className="text-muted-foreground">{s.renewsAt ?? '—'}</TableCell>
+                  <TableCell><StatusBadge status={s.status} /></TableCell>
+                  <TableCell>
+                    <Select value={s.status} onValueChange={v => setStatus(s.id, v as Subscription['status'])}>
+                      <SelectTrigger className="min-w-24"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="active">Active</SelectItem>
+                        <SelectItem value="trialing">Essai</SelectItem>
+                        <SelectItem value="past_due">Impayée</SelectItem>
+                        <SelectItem value="cancelled">Annulée</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
 
 
     </div>
