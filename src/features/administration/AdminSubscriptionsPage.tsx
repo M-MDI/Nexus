@@ -114,7 +114,32 @@ export function AdminSubscriptionsPage() {
         </CardContent>
       </Card>
 
-
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Créer une offre</DialogTitle>
+            <DialogDescription>Attribuez une offre commerciale à un compte.</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <div className="space-y-1.5">
+              <Label htmlFor="sub-plan">Nom de l’offre</Label>
+              <Input id="sub-plan" value={form.plan} onChange={e => setForm(f => ({ ...f, plan: e.target.value }))} placeholder="Ex. Offre Organisateur" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="sub-price">Prix</Label>
+              <Input id="sub-price" value={form.priceLabel} onChange={e => setForm(f => ({ ...f, priceLabel: e.target.value }))} placeholder="Ex. 4 900 MAD" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="sub-email">E-mail du client</Label>
+              <Input id="sub-email" type="email" value={form.ownerEmail} onChange={e => setForm(f => ({ ...f, ownerEmail: e.target.value }))} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDialogOpen(false)}>Annuler</Button>
+            <Button onClick={create} disabled={!form.plan.trim()}>Créer</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
