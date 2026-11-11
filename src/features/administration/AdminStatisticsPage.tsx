@@ -16,7 +16,18 @@ export function AdminStatisticsPage() {
         <StatCard label="Souscriptions actives" value={platformStats.activeSubscriptions} icon={<TrendingUp className="size-5" />} />
       </div>
 
-
+      <SectionCard title="Croissance — 6 derniers mois" description="Inscriptions utilisateurs et événements publiés.">
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <p className="mb-3 text-sm font-medium">Nouveaux utilisateurs</p>
+            <MiniBarChart data={platformStats.monthlyGrowth} valueKey="users" />
+          </div>
+          <div>
+            <p className="mb-3 text-sm font-medium">Événements publiés</p>
+            <MiniBarChart data={platformStats.monthlyGrowth} valueKey="events" />
+          </div>
+        </div>
+      </SectionCard>
 
 
     </div>
