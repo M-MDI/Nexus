@@ -29,7 +29,20 @@ export function AdminStatisticsPage() {
         </div>
       </SectionCard>
 
-
+      <div className="grid gap-4 sm:grid-cols-3">
+        {[
+          { label: 'Taux d’activation profil', value: '82%' },
+          { label: 'Taux d’acceptation des matchs', value: '64%' },
+          { label: 'Rendez-vous honorés / demandés', value: '71%' },
+        ].map(s => (
+          <Card key={s.label} className="py-0">
+            <CardContent className="p-4">
+              <p className="text-2xl font-semibold tnum">{s.value}</p>
+              <p className="text-sm text-muted-foreground">{s.label}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
