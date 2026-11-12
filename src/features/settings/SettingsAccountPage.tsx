@@ -64,7 +64,20 @@ export function SettingsAccountPage() {
         </SectionCard>
       </div>
 
-
+      <Card className="border-destructive/40">
+        <CardHeader><CardTitle className="text-base text-destructive">Zone sensible</CardTitle></CardHeader>
+        <CardContent className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="text-sm font-medium">Supprimer mon compte</p>
+            <p className="text-sm text-muted-foreground">
+              Supprime définitivement votre profil, vos données et vos échanges. Cette action est irréversible.
+            </p>
+          </div>
+          <Button variant="destructive" onClick={() => setDeleteOpen(true)}>
+            <Trash2 className="mr-2 size-4" />Supprimer le compte
+          </Button>
+        </CardContent>
+      </Card>
 
 
     </div>
