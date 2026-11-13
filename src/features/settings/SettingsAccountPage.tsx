@@ -79,7 +79,23 @@ export function SettingsAccountPage() {
         </CardContent>
       </Card>
 
-
+      <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Confirmer la suppression</DialogTitle>
+            <DialogDescription>
+              Toutes vos données personnelles seront effacées conformément à votre demande d’accès et de suppression.
+              Cette action est irréversible.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteOpen(false)}>Annuler</Button>
+            <Button variant="destructive" onClick={() => { setDeleteOpen(false); toast.success('Demande de suppression enregistrée (démo)'); }}>
+              Confirmer la suppression
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
