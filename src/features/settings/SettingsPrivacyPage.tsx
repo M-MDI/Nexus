@@ -58,7 +58,26 @@ export function SettingsPrivacyPage() {
         </div>
       </SectionCard>
 
-
+      <SectionCard title="Vos données">
+        <div className="grid gap-3 xl:grid-cols-2">
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border p-4">
+            <div className="min-w-0 flex-1 basis-44">
+              <p className="text-sm font-medium">Exporter mes données</p>
+              <p className="text-sm text-muted-foreground">Recevez une copie de vos données personnelles.</p>
+            </div>
+            <Button variant="outline" size="sm" onClick={requestExport} disabled={prefs.dataExportRequested}>
+              {prefs.dataExportRequested ? 'Demande envoyée' : 'Demander un export'}
+            </Button>
+          </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-destructive/30 p-4">
+            <div className="min-w-0 flex-1 basis-44">
+              <p className="text-sm font-medium">Supprimer mes données</p>
+              <p className="text-sm text-muted-foreground">Demande de suppression de votre compte et de vos données.</p>
+            </div>
+            <Button variant="destructive" size="sm" onClick={requestDeletion}>Demander la suppression</Button>
+          </div>
+        </div>
+      </SectionCard>
     </div>
   );
 }
