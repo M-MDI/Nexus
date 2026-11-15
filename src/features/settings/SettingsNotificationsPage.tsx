@@ -61,7 +61,12 @@ export function SettingsNotificationsPage() {
         </div>
       </SectionCard>
 
-
+      <Card className="py-0">
+        <CardContent className="flex flex-wrap items-center justify-between gap-3 p-4">
+          <p className="text-sm text-muted-foreground">Vous ne recevez pas vos notifications ?</p>
+          <Button variant="outline" size="sm" onClick={testNotification}>Envoyer une notification test</Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }
