@@ -54,7 +54,108 @@ export function DashboardPage() {
         <StatCard icon={<Link2 className="size-5" />} label="Nouvelles suggestions" value={newMatches} hint="matching en cours" />
       </div>
 
+      <div className="grid grid-cols-1 gap-(--dashboard-gap) lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <div className="flex min-w-0 flex-col gap-(--dashboard-gap)">
+          {/* Upcoming events */}
+          <Card className="[@media(max-height:800px)]:gap-2">
+            <CardHeader className="flex flex-wrap items-center justify-between gap-2">
+              <CardTitle className="text-base">Événements à venir</CardTitle>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/events/my">Voir tout <ArrowRight className="ml-1 size-4" /></Link>
+              </Button>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              {upcomingEvents.map(e => (
+                <Link key={e.id} to={`/events/${e.id}`} className="flex items-center gap-3 rounded-lg border border-border p-2.5 transition-colors hover:border-primary/40">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-info-surface text-info">
+                    <CalendarDays className="size-5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="break-words font-medium">{e.name}</p>
+                    <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                      <MapPin className="size-3 shrink-0" /> {e.location}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-sm font-medium">{formatDate(e.startsAt)}</p>
+                    <StatusBadge status={e.myStatus ?? 'registered'} />
+                  </div>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
 
+          {/* Pending requests */}
+          <Card className="[@media(max-height:800px)]:gap-2">
+            <CardHeader className="flex flex-wrap items-center justify-between gap-2">
+              <CardTitle className="text-base">Demandes en attente</CardTitle>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/network">Voir tout <ArrowRight className="ml-1 size-4" /></Link>
+              </Button>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              {pendingConnections.length === 0 && (
+                <p className="py-4 text-center text-sm text-muted-foreground">Aucune demande en attente.</p>
+              )}
+              {pendingConnections.map(c => (
+                <div key={c.id} className="flex items-center gap-3 rounded-lg border border-border p-2.5">
+                  <PersonAvatar person={c.person} size="sm" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium">{c.person.fullName}</p>
+                    <p className="break-words text-xs text-muted-foreground">{c.person.title} — {c.person.company}</p>
+                  </div>
+                  <StatusBadge status={c.status} />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Right rail */}
+        <div className="flex min-w-0 flex-col gap-(--dashboard-gap)">
+          <Card className="[@media(max-height:800px)]:gap-2">
+            <CardHeader><CardTitle className="text-base">Profil complété</CardTitle></CardHeader>
+            <CardContent>
+              <div className="mb-2 flex items-center justify-between text-sm">
+                <span className="text-muted-foreground">Complétion</span>
+                <span className="font-medium">{profile?.completionPercentage ?? 0}%</span>
+              </div>
+              <Progress value={profile?.completionPercentage ?? 0} className="h-2" />
+              <Button variant="link" size="sm" className="mt-2 h-auto p-0" asChild>
+                <Link to="/profile">Compléter mon profil</Link>
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card className="[@media(max-height:800px)]:gap-2">
+            <CardHeader className="flex flex-wrap items-center justify-between gap-2">
+              <CardTitle className="text-base">Prochains rendez-vous</CardTitle>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/meetings">Agenda <ArrowRight className="ml-1 size-4" /></Link>
+              </Button>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              {upcomingMeetings.length === 0 && (
+                <p className="py-4 text-center text-sm text-muted-foreground">Aucun rendez-vous planifié.</p>
+              )}
+              {upcomingMeetings.map(m => (
+                <div key={m.id} className="flex items-center gap-2.5 rounded-lg bg-muted/50 p-2">
+                  <div className="rounded-lg bg-info-surface p-2 text-info">
+                    <CalendarDays className="size-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="break-words text-sm font-medium">{m.title}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatDate(m.startsAt)} à {formatTime(m.startsAt)} — {m.withPerson.fullName}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
+        </div>
+      </div>
 
 
     </div>
