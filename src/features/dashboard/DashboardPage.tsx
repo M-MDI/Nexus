@@ -157,7 +157,14 @@ export function DashboardPage() {
         </div>
       </div>
 
-
+      <Card className="[@media(max-height:800px)]:py-2">
+        <CardContent className="grid items-center gap-1 sm:grid-cols-3 lg:grid-cols-[auto_repeat(3,minmax(0,1fr))] lg:gap-3">
+          <CardTitle className="sm:col-span-3 lg:col-span-1">Actions rapides</CardTitle>
+          <QuickAction to="/events/discover" label="Découvrir des événements" />
+          <QuickAction to="/matching" label="Voir les suggestions de matching" />
+          <QuickAction to="/business-card" label="Partager ma carte digitale" />
+        </CardContent>
+      </Card>
     </div>
   );
 }
