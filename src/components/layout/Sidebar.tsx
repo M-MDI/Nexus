@@ -92,32 +92,37 @@ export function Sidebar() {
     );
   };
 
-  const isActive = (path: string) => location.pathname === path || location.pathname.startsWith(path + '/');
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <>
-      <button
-        onClick={() => setMobileOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-surface border border-border rounded-lg"
-      >
-        <Menu size={20} />
-      </button>
+      {!mobileOpen && (
+        <button
+          onClick={() => setMobileOpen(true)}
+          aria-label="Ouvrir la navigation"
+          aria-expanded={false}
+          className="lg:hidden fixed top-[calc((var(--shell-header-height)-2.375rem)/2)] left-4 z-50 p-2 bg-surface text-icon border border-control rounded-lg"
+        >
+          <Menu size={20} />
+        </button>
+      )}
 
       <aside className={cn(
-        "fixed md:relative z-40 h-full bg-surface border-r border-border transition-all duration-200",
+        "fixed lg:relative z-40 h-dvh bg-sidebar text-sidebar-foreground border-r border-sidebar-border transition-all duration-200",
         collapsed ? "w-[64px]" : "w-[240px]",
-        mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        mobileOpen ? "translate-x-0" : "invisible -translate-x-full lg:visible lg:translate-x-0"
       )}>
         <div className="flex flex-col h-full">
           {/* Logo */}
           <div className={cn(
-            "flex items-center gap-3 px-4 h-16 border-b border-border",
+            "flex items-center gap-3 px-4 h-(--shell-header-height) shrink-0 border-b border-border",
             collapsed && "justify-center px-2"
           )}>
-            <img src={logo.src} alt="Nexus" className={cn("h-8 w-auto", collapsed && "h-6")} />
+            <img src={logo.src} alt="Nexus" className={cn("nexus-logo h-8 w-auto", collapsed && "h-6")} />
             {!collapsed && (
               <button
-                onClick={() => setCollapsed(true)}
+                onClick={() => mobileOpen ? setMobileOpen(false) : setCollapsed(true)}
+                aria-label={mobileOpen ? "Fermer la navigation" : "Réduire la navigation"}
                 className="ml-auto p-1 hover:bg-surface-hover rounded"
               >
                 <X size={18} />
@@ -126,12 +131,13 @@ export function Sidebar() {
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 overflow-y-auto py-4">
+          <nav className="min-h-0 flex-1 overflow-y-auto overscroll-contain py-3">
             {navSections.map(section => (
-              <div key={section.title} className="mb-4">
+              <div key={section.title} className="mb-2">
                 {!collapsed && (
                   <button
                     onClick={() => toggleSection(section.title)}
+                    aria-expanded={expandedSections.includes(section.title)}
                     className="w-full flex items-center justify-between px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide hover:bg-surface-hover"
                   >
                     {section.title}
@@ -152,10 +158,12 @@ export function Sidebar() {
                           key={item.path}
                           to={item.path}
                           onClick={() => setMobileOpen(false)}
+                          aria-current={active ? "page" : undefined}
+                          aria-label={collapsed ? item.label : undefined}
                           className={cn(
-                            "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
+                            "flex items-center gap-3 px-3 py-1.5 rounded-lg text-sm transition-colors",
                             active
-                              ? "bg-sidebar-active text-foreground font-medium"
+                              ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium inset-shadow-[2px_0_0_var(--selected-indicator)]"
                               : "text-muted-foreground hover:bg-surface-hover hover:text-foreground",
                             collapsed && "justify-center px-2"
                           )}
@@ -163,9 +171,9 @@ export function Sidebar() {
                           <Icon size={18} className="flex-shrink-0" />
                           {!collapsed && (
                             <>
-                              <span className="flex-1 truncate">{item.label}</span>
+                              <span className="min-w-0 flex-1 break-words">{item.label}</span>
                               {item.badge && (
-                                <span className="px-1.5 py-0.5 text-xs bg-primary text-white rounded-full">
+                                <span className="px-1.5 py-0.5 text-xs bg-primary text-primary-foreground rounded-full">
                                   {item.badge}
                                 </span>
                               )}
@@ -181,12 +189,12 @@ export function Sidebar() {
           </nav>
 
           {/* User menu */}
-          <div className="border-t border-border p-4">
+          <div className="shrink-0 border-t border-border px-4 py-3">
             <div className={cn(
               "flex items-center gap-3",
               collapsed && "justify-center"
             )}>
-              <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center text-sm font-semibold">
+              <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">
                 SM
               </div>
               {!collapsed && (
@@ -199,6 +207,7 @@ export function Sidebar() {
             {collapsed && (
               <button
                 onClick={() => setCollapsed(false)}
+                aria-label="Développer la navigation"
                 className="w-full mt-4 flex justify-center p-1 hover:bg-surface-hover rounded"
               >
                 <Menu size={18} />
@@ -210,7 +219,7 @@ export function Sidebar() {
 
       {mobileOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-30 md:hidden"
+          className="fixed inset-0 bg-scrim z-30 lg:hidden"
           onClick={() => setMobileOpen(false)}
         />
       )}
