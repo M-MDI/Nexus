@@ -12,7 +12,11 @@ import formspic from './assets/formspic.png';
 import { ProfilePage } from './profile/ProfilePage';
 import { AppShell } from './app/layouts/AppShell';
 import { DashboardPage } from './features/dashboard/DashboardPage';
-import { EventsDiscoverPage, EventsMyPage, EventsAgendaPage, MatchingPage } from './features/events/EventsPages';
+import { EventsDiscoverPage } from './features/events/EventsDiscoverPage';
+import { EventDetailPage } from './features/events/EventDetailPage';
+import { EventsMyPage } from './features/events/EventsMyPage';
+import { EventsAgendaPage } from './features/events/EventsAgendaPage';
+import { MatchingPage } from './features/events/MatchingPage';
 import { BusinessCardPage, NetworkPage, MessagesPage, MeetingsPage } from './features/networking/NetworkingPages';
 import { CompanyPage, CompanyCollaboratorsPage, CompanyInvitationsPage, CompanyTokensPage } from './features/company/CompanyPages';
 import { OrganizerEventsPage, OrganizerParticipantsPage, OrganizerProgramPage, OrganizerAttendancePage, OrganizerStatisticsPage } from './features/organizer/OrganizerPages';
@@ -390,6 +394,7 @@ function App() {
         <Route path="/events/discover" element={<EventsDiscoverPage />} />
         <Route path="/events/my" element={<EventsMyPage />} />
         <Route path="/events/agenda" element={<EventsAgendaPage />} />
+        <Route path="/events/:eventId" element={<EventDetailPage />} />
         <Route path="/matching" element={<MatchingPage />} />
         <Route path="/company" element={<CompanyPage />} />
         <Route path="/company/collaborators" element={<CompanyCollaboratorsPage />} />
