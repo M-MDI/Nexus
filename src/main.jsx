@@ -25,7 +25,11 @@ import { CompanyPage } from './features/company/CompanyPage';
 import { CompanyCollaboratorsPage } from './features/company/CompanyCollaboratorsPage';
 import { CompanyInvitationsPage } from './features/company/CompanyInvitationsPage';
 import { CompanyTokensPage } from './features/company/CompanyTokensPage';
-import { OrganizerEventsPage, OrganizerParticipantsPage, OrganizerProgramPage, OrganizerAttendancePage, OrganizerStatisticsPage } from './features/organizer/OrganizerPages';
+import { OrganizerEventsPage } from './features/organizer/OrganizerEventsPage';
+import { OrganizerParticipantsPage } from './features/organizer/OrganizerParticipantsPage';
+import { OrganizerProgramPage } from './features/organizer/OrganizerProgramPage';
+import { OrganizerAttendancePage } from './features/organizer/OrganizerAttendancePage';
+import { OrganizerStatisticsPage } from './features/organizer/OrganizerStatisticsPage';
 import { AdminUsersPage, AdminEventsPage, AdminSubscriptionsPage, AdminStatisticsPage } from './features/administration/AdminPages';
 import { SettingsAccountPage, SettingsPrivacyPage, SettingsNotificationsPage } from './features/settings/SettingsPages';
 
