@@ -34,7 +34,9 @@ import { AdminUsersPage } from './features/administration/AdminUsersPage';
 import { AdminEventsPage } from './features/administration/AdminEventsPage';
 import { AdminSubscriptionsPage } from './features/administration/AdminSubscriptionsPage';
 import { AdminStatisticsPage } from './features/administration/AdminStatisticsPage';
-import { SettingsAccountPage, SettingsPrivacyPage, SettingsNotificationsPage } from './features/settings/SettingsPages';
+import { SettingsAccountPage } from './features/settings/SettingsAccountPage';
+import { SettingsPrivacyPage } from './features/settings/SettingsPrivacyPage';
+import { SettingsNotificationsPage } from './features/settings/SettingsNotificationsPage';
 
 const screens = {
   login: {
