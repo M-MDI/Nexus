@@ -30,7 +30,10 @@ import { OrganizerParticipantsPage } from './features/organizer/OrganizerPartici
 import { OrganizerProgramPage } from './features/organizer/OrganizerProgramPage';
 import { OrganizerAttendancePage } from './features/organizer/OrganizerAttendancePage';
 import { OrganizerStatisticsPage } from './features/organizer/OrganizerStatisticsPage';
-import { AdminUsersPage, AdminEventsPage, AdminSubscriptionsPage, AdminStatisticsPage } from './features/administration/AdminPages';
+import { AdminUsersPage } from './features/administration/AdminUsersPage';
+import { AdminEventsPage } from './features/administration/AdminEventsPage';
+import { AdminSubscriptionsPage } from './features/administration/AdminSubscriptionsPage';
+import { AdminStatisticsPage } from './features/administration/AdminStatisticsPage';
 import { SettingsAccountPage, SettingsPrivacyPage, SettingsNotificationsPage } from './features/settings/SettingsPages';
 
 const screens = {
