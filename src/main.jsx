@@ -80,7 +80,7 @@ function messageFor(error) {
 function Brand() {
   return (
     <Link className="brand" to="/login">
-      <img src={logo.src} alt="Nexus — Accueil" />
+      <img className="nexus-logo" src={logo.src} alt="Nexus — Accueil" />
     </Link>
   );
 }
